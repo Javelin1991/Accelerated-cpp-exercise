@@ -9,7 +9,7 @@
 #include "grade.hpp"
 #include "Student_Info.hpp"
 #include "extract_fails.hpp"
-#include "print.hpp"
+#include "helper.hpp"
 
 using std::cin;
 using std::cout;
@@ -23,8 +23,16 @@ using std::string;
 using std::vector;
 using std::list;
 
+void runProgrammeTwo();
+
 int main()
 {
+    int programe_no = 2;
+    if (programe_no == 2) {
+        runProgrammeTwo();
+        return 0;
+    }
+    
     list<Student_info> students;
     vector<double> homework;
     Student_info record;
@@ -75,3 +83,16 @@ int main()
     
     return 0;
 }
+
+void runProgrammeTwo() {
+    cout << "Please enter a string to be split: ";
+    string s;
+    while (getline(cin, s)) {
+        vector<string> v = split(s);
+        
+        for(vector<string>::size_type i=0; i != v.size(); i++) {
+            cout << v[i] << endl;
+        }
+    }
+}
+

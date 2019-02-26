@@ -11,7 +11,11 @@
 
 #include <stdio.h>
 #include <list>
+#include <string>
 #include "Student_Info.hpp"
 
+using std::string; using std::vector;
+
 void print(std::list<Student_info>&, int);
+vector<string> split(const string&);
 #endif /* print_hpp */
