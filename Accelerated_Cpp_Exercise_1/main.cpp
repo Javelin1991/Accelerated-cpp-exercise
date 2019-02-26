@@ -5,8 +5,11 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include <list>
 #include "grade.hpp"
-#include "Student_info.hpp"
+#include "Student_Info.hpp"
+#include "extract_fails.hpp"
+#include "print.hpp"
 
 using std::cin;
 using std::cout;
@@ -18,10 +21,11 @@ using std::sort;
 using std::streamsize;
 using std::string;
 using std::vector;
+using std::list;
 
 int main()
 {
-    vector<Student_info> students;
+    list<Student_info> students;
     vector<double> homework;
     Student_info record;
     int maxlen = 0;   // the length of the longest name
@@ -36,7 +40,6 @@ int main()
         string name;
         double midterm_score;
         double final_score;
-        double x;
         cout << "Please enter student name: ";
         cin >> name;
         if (name[0] == '#') {
@@ -55,30 +58,20 @@ int main()
         cin.clear();
     }
 
-    // alphabetize the student records
-    sort(students.begin(), students.end(), compare);
 
     // write the names and grades
-    for (vector<Student_info>::size_type i = 0;
-         i != students.size(); ++i)
-    {
-        //write the name, padded on teh right to maxlen + 1 characters
-        cout << students[i].name
-             << string(maxlen + 1 - students[i].name.size(), ' ');
-
-         //compute and write the grade
-        try
-        {
-            double final_grade = grade(students[i]);
-            streamsize prec = cout.precision();
-            cout << setprecision(3) << final_grade
-                 << setprecision(prec);
-        }
-        catch (domain_error e)
-        {
-            cout << e.what();
-        }
-        cout << endl;
-    }
+    // Extract the failed students
+    list<Student_info> students_failed = extract_fails(students);
+    
+    // sort lists
+    students_failed.sort(compare);
+    
+    // Report passing students
+    cout << "These students have passed." << endl;
+    print(students, maxlen);
+        // Report failing students
+    cout << "These students have failed." << endl;
+    print(students_failed, maxlen);
+    
     return 0;
 }
