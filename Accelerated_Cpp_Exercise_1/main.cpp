@@ -48,11 +48,9 @@ int main()
         cout << "Please enter final score: ";
         cin >> final_score;
         cout << "Please enter homework score: ";
-        while(cin >> x) {
-            homework.push_back(x);
-        }
+        read_hw(cin, homework);
         record = {name, midterm_score, final_score, homework};
-        maxlen = record.name.size();
+        maxlen = std::max(maxlen, (int) record.name.size());
         students.push_back(record);
         cin.clear();
     }

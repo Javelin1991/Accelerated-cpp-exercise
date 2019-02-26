@@ -18,7 +18,6 @@ istream& read(istream& is, Student_info& s)
     is >> s.name >> s.midterm >> s.final;
     
     // read and store all the student's homework grades
-    read_hw(is, s.homework);
     return is;
 }
 
@@ -26,8 +25,7 @@ istream& read(istream& is, Student_info& s)
 // (as defined in S4.1.3/57)
 istream& read_hw(istream& in, vector<double>& hw)
 {
-    if (in)
-    {
+
         // get rid of previous contents
         hw.clear();
         
@@ -38,6 +36,5 @@ istream& read_hw(istream& in, vector<double>& hw)
         
         // clear the stream so that input will work for the next student
         in.clear();
-    }
     return in;
 }
