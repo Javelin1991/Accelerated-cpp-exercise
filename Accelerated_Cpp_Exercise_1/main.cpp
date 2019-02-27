@@ -23,21 +23,43 @@ using std::string;
 using std::vector;
 using std::list;
 
-void runProgrammeTwo();
+void runGradeCalculator();
+void runStringSplitter();
+void runStringFrameConcatenator();
+void test();
 
 int main()
 {
-    int programe_no = 2;
-    if (programe_no == 2) {
-        runProgrammeTwo();
-        return 0;
-    }
+    int programmeChoice;
+    cout << "Choose which programme to run: " << endl;
+    cout << "(1) Grade Calculator" << endl;
+    cout << "(2) String Splitter" << endl;
+    cout << "(3) String Frame Concatenator" << endl;
+    cout << "(4) Rotate" << endl;
+
+    cin >> programmeChoice;
     
+    switch (programmeChoice) {
+        case 1:
+            runGradeCalculator();
+            break;
+        case 2:
+            runStringSplitter();
+            break;
+        case 3: runStringFrameConcatenator();
+            break;
+        case 4: test();
+            break;
+    }
+    return 0;
+}
+
+void runGradeCalculator() {
     list<Student_info> students;
     vector<double> homework;
     Student_info record;
     int maxlen = 0;   // the length of the longest name
-
+    
     // read and store all the student's data.
     // Invariant:   students contain all the student records read so far
     //              maxlen contains the length of the longest name in students
@@ -65,8 +87,8 @@ int main()
         students.push_back(record);
         cin.clear();
     }
-
-
+    
+    
     // write the names and grades
     // Extract the failed students
     list<Student_info> students_failed = extract_fails(students);
@@ -77,14 +99,12 @@ int main()
     // Report passing students
     cout << "These students have passed." << endl;
     print(students, maxlen);
-        // Report failing students
+    // Report failing students
     cout << "These students have failed." << endl;
     print(students_failed, maxlen);
-    
-    return 0;
 }
 
-void runProgrammeTwo() {
+void runStringSplitter() {
     cout << "Please enter a string to be split: ";
     string s;
     while (getline(cin, s)) {
@@ -96,3 +116,41 @@ void runProgrammeTwo() {
     }
 }
 
+void runStringFrameConcatenator() {
+    string input;
+    vector<string> vet;
+    getchar();
+    while (true) {
+        cout << "Please enter a string: ";
+        getline(cin, input);
+
+        if (input[0] == '#') {
+            break;
+        }
+        vet.push_back(input);
+        cin.clear();
+    }
+    frame(vet);
+    printVector(vet);
+}
+
+void test() {
+    string input;
+    vector<string> vet;
+    getchar();
+    while (true) {
+        cout << "Please enter a string: ";
+        getline(cin, input);
+        
+        if (input[0] == '#') {
+            break;
+        }
+        vet.push_back(input);
+        cin.clear();
+    }
+    vector<string> final_result = rotate(vet);
+    
+    for(string::size_type i=0; i != final_result.size(); i++) {
+        cout << final_result[i] << endl;
+    }
+}

@@ -14,8 +14,13 @@
 #include <string>
 #include "Student_Info.hpp"
 
-using std::string; using std::vector;
+using std::string; using std::vector; using std::list;
 
-void print(std::list<Student_info>&, int);
+void print(list<Student_info>&, int);
 vector<string> split(const string&);
+vector<string> frame(const vector<string>&);
+void printVector(const vector<string>&);
+string rotateLeft(vector<string>&);
+vector<string> rotate(vector<string>&);
+
 #endif /* print_hpp */
