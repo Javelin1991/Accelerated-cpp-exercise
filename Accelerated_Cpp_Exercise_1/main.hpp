@@ -8,6 +8,6 @@
 void runGradeCalculator();
 void runStringSplitter();
 void runStringFrameConcatenator();
-void test();
+void permutatePageIndex();
 
 #endif // GUARD_GRADE_H

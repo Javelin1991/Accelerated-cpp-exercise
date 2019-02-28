@@ -16,7 +16,7 @@
 #include <iomanip>
 
 using std::list; using std::streamsize; using std::string; using std::max; using std::sort;
-using std::cout; using std::endl; using std::setprecision; using std::vector;
+using std::cout; using std::endl; using std::setprecision; using std::vector; using std::isupper;
 
 void print(std::list<Student_info>& students, int maxlen) {
     for (list<Student_info>::const_iterator i = students.begin();
@@ -72,7 +72,15 @@ string::size_type width(const vector<string>& v) {
     return maxlen;
 }
 
-vector<string> frame(const vector<string>& v) {
+string::size_type item_width(const vector<Item>& v) {
+    string::size_type maxlen = 0;
+    for(vector<Item>::size_type i=0; i != v.size(); i++) {
+        maxlen = max(maxlen, v[i].name.size());
+    }
+    return maxlen;
+}
+
+vector<string> frame(const vector<string>& v, bool hug_right) {
     vector<string> ret;
     string::size_type maxlen = width(v);
     string border(maxlen + 4, '*');
@@ -80,9 +88,33 @@ vector<string> frame(const vector<string>& v) {
     ret.push_back(border);
     
     for(vector<string>::size_type i=0; i != v.size(); i++) {
-        ret.push_back("* " + v[i] + string(maxlen - v[i].size(), ' ') + " *");
+        if (hug_right) {
+            ret.push_back("* " + string(maxlen - v[i].size(), ' ') + v[i] + " *");
+        } else {
+            ret.push_back("* " + v[i] + string(maxlen - v[i].size(), ' ') + " *");
+        }
     }
     ret.push_back(border);
+    return ret;
+}
+
+vector<Item> frameItem(const vector<Item>& v) {
+    vector<Item> ret;
+    string::size_type maxlen = item_width(v);
+    string border(maxlen + 4, '*');
+    Item tmp;
+    tmp.name = border;
+    ret.push_back(tmp);
+    
+    for(vector<Item>::size_type i=0; i != v.size(); i++) {
+        Item tmp2;
+        tmp2.idx = v[i].idx;
+        tmp2.name = "* " + v[i].name + string(maxlen - v[i].name.size(), ' ') + " *";
+        ret.push_back(tmp2);
+    }
+    Item tmp3;
+    tmp3.name = border;
+    ret.push_back(tmp3);
     return ret;
 }
 
@@ -131,12 +163,27 @@ string rotateLeft(vector<string>& vec) {
     return result;
 }
 
-vector<string> rotate(vector<string>& vec) {
-    vector<string> final_result;
+bool compare_result(const Item& x,const Item& y)
+{
+    return x.name < y.name;
+}
+
+vector<vector<Item>> rotate(vector<string>& vec) {
+    vector<Item> final_result_upper;
+    vector<Item> final_result_lower;
+    vector<vector<Item>> final_result;
     int k = 0;
     while(k < vec.size()) {
         string temp = vec[k];
-        final_result.push_back(temp);
+        Item new_item;
+        new_item.line = k;
+        new_item.name = temp;
+        new_item.idx = 0;
+        if (isupper(temp[0])) {
+            final_result_upper.push_back(new_item);
+        } else {
+            final_result_lower.push_back(new_item);
+        }
         vector<string> split_string = split(temp);
         
         for(int i=0; i<split_string.size()-1; i++) {
@@ -149,11 +196,21 @@ vector<string> rotate(vector<string>& vec) {
             }
             split_string[split_string.size()-1] = temp;
             string final_string = rotateLeft(split_string);
-            final_result.push_back(final_string);
+            Item tmp_item;
+            tmp_item.line = k;
+            tmp_item.idx = i+1;
+            tmp_item.name = final_string;
+            
+            if (isupper(final_string[0])) {
+                final_result_upper.push_back(tmp_item);
+            } else {
+                final_result_lower.push_back(tmp_item);
+            }
         }
         k++;
     }
-    sort(final_result.begin(), final_result.end());
+    final_result.push_back(final_result_lower);
+    final_result.push_back(final_result_upper);
     return final_result;
 }
 

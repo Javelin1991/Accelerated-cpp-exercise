@@ -26,7 +26,7 @@ using std::list;
 void runGradeCalculator();
 void runStringSplitter();
 void runStringFrameConcatenator();
-void test();
+void permutatePageIndex();
 
 int main()
 {
@@ -48,7 +48,7 @@ int main()
             break;
         case 3: runStringFrameConcatenator();
             break;
-        case 4: test();
+        case 4: permutatePageIndex();
             break;
     }
     return 0;
@@ -94,7 +94,7 @@ void runGradeCalculator() {
     list<Student_info> students_failed = extract_fails(students);
     
     // sort lists
-    students_failed.sort(compare);
+//    students_failed.sort(compare);
     
     // Report passing students
     cout << "These students have passed." << endl;
@@ -130,13 +130,14 @@ void runStringFrameConcatenator() {
         vet.push_back(input);
         cin.clear();
     }
-    frame(vet);
-    printVector(vet);
+    vector<string> outcome = frame(vet, false);
+    printVector(outcome);
 }
 
-void test() {
+void permutatePageIndex() {
     string input;
     vector<string> vet;
+    vector<string> original_input;
     getchar();
     while (true) {
         cout << "Please enter a string: ";
@@ -148,9 +149,49 @@ void test() {
         vet.push_back(input);
         cin.clear();
     }
-    vector<string> final_result = rotate(vet);
-    
-    for(string::size_type i=0; i != final_result.size(); i++) {
-        cout << final_result[i] << endl;
+    for(int i=0; i<vet.size(); i++) {
+        original_input.push_back(vet[i]);
     }
+    vector<vector<Item>> final_result = rotate(vet);
+    
+    //sort strings that start with small letter
+    sort(final_result[0].begin(), final_result[0].end(), compare_result);
+    
+    //sort strings that start with capital letter
+    sort(final_result[1].begin(), final_result[1].end(), compare_result);
+    
+    cout << endl;
+    
+    final_result[0].insert(final_result[0].end(), final_result[1].begin(), final_result[1].end());
+    vector<Item> vet1 = final_result[0];
+    vector<string> rectangle1;
+    vector<string> rectangle2;
+    string spacer(5, ' ');
+    
+    for(string::size_type i=0; i != vet1.size(); i++) {
+        int end = vet1[i].idx;
+        vector<string> tmp_store = split(original_input[vet1[i].line]);
+        string tmp_str;
+        for(int i=0; i<end; i++) {
+            cout << tmp_store[i] << " ";
+            tmp_str += tmp_store[i];
+            if (i != end-1) tmp_str += " ";
+        }
+        rectangle1.push_back(tmp_str);
+        tmp_str = "";
+        cout << spacer;
+        for(int i=end; i<tmp_store.size(); i++) {
+            cout << tmp_store[i] << " ";
+            tmp_str += tmp_store[i];
+            if (i != tmp_store.size()-1) tmp_str += " ";
+        }
+        rectangle2.push_back(tmp_str);
+        cout << endl;
+    }
+    cout << endl;
+    vector<string> holder1 = frame(rectangle1, true);
+    vector<string> holder2 = frame(rectangle2, false);
+    vector<string> outcome = hcat(holder1, holder2);
+    printVector(outcome);
+    cout << endl;
 }
