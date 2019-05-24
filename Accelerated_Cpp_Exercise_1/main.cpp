@@ -169,29 +169,31 @@ void permutatePageIndex() {
     string spacer(5, ' ');
     
     for(string::size_type i=0; i != vet1.size(); i++) {
+        // this will tell us where to break the setence into two parts, separated by space for debugging purposes
         int end = vet1[i].idx;
-        vector<string> tmp_store = split(original_input[vet1[i].line]);
+        // "I am a god" ===> "I am" and "a god" provided that the index is idx number 2
+        vector<string> tmp_store = split(original_input[vet1[i].line]); // retrieve by the line number, either first line or second line in the given e.g.
         string tmp_str;
         for(int i=0; i<end; i++) {
             cout << tmp_store[i] << " ";
             tmp_str += tmp_store[i];
-            if (i != end-1) tmp_str += " ";
+            if (i != end-1) tmp_str += " "; //concatenate each word follow by a space except for the last word
         }
-        rectangle1.push_back(tmp_str);
-        tmp_str = "";
+        rectangle1.push_back(tmp_str); //get the first part before the space, for e.g. "I am"
+        tmp_str = ""; // reset the tmp_str to empty string
         cout << spacer;
         for(int i=end; i<tmp_store.size(); i++) {
             cout << tmp_store[i] << " ";
             tmp_str += tmp_store[i];
-            if (i != tmp_store.size()-1) tmp_str += " ";
+            if (i != tmp_store.size()-1) tmp_str += " ";  //concatenate each word follow by a space except for the last word
         }
-        rectangle2.push_back(tmp_str);
+        rectangle2.push_back(tmp_str); // get the second part after the space for e.g. "a god"
         cout << endl;
     }
     cout << endl;
-    vector<string> holder1 = frame(rectangle1, true);
-    vector<string> holder2 = frame(rectangle2, false);
-    vector<string> outcome = hcat(holder1, holder2);
-    printVector(outcome);
+    vector<string> holder1 = frame(rectangle1, true); // decorate the first part of all the sentences with *
+    vector<string> holder2 = frame(rectangle2, false);// decorate the second part of all the sentences with *
+    vector<string> outcome = hcat(holder1, holder2); // horizontally concatenate the two frames
+    printVector(outcome); //print the final output string
     cout << endl;
 }
