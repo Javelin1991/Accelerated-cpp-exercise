@@ -1,7 +1,6 @@
 #include <stdexcept>
 #include <vector>
 #include "grade.hpp"
-#include "median.hpp"
 #include "Student_Info.hpp"
 
 using std::domain_error;

@@ -24,18 +24,24 @@ using std::vector;
 using std::list;
 
 void runGradeCalculator();
+void runGradeCalculator_v2();
 void runStringSplitter();
 void runStringFrameConcatenator();
 void permutatePageIndex();
+void checkPalindrome();
+void findURLs();
 
 int main()
 {
     int programmeChoice;
     cout << "Choose which programme to run: " << endl;
-    cout << "(1) Grade Calculator" << endl;
-    cout << "(2) String Splitter" << endl;
-    cout << "(3) String Frame Concatenator" << endl;
-    cout << "(4) Rotate" << endl;
+    cout << "(1) Grade Calculator using mean" << endl;
+    cout << "(2) Grade Calculator using median" << endl;
+    cout << "(3) String Splitter" << endl;
+    cout << "(4) String Frame Concatenator" << endl;
+    cout << "(5) Rotate" << endl;
+    cout << "(6) Check Palindrome" << endl;
+    cout << "(7) URL String Finder" << endl;
 
     cin >> programmeChoice;
     
@@ -44,11 +50,18 @@ int main()
             runGradeCalculator();
             break;
         case 2:
+            runGradeCalculator_v2();
+            break;
+        case 3:
             runStringSplitter();
             break;
-        case 3: runStringFrameConcatenator();
+        case 4: runStringFrameConcatenator();
             break;
-        case 4: permutatePageIndex();
+        case 5: permutatePageIndex();
+            break;
+        case 6: checkPalindrome();
+            break;
+        case 7: findURLs();
             break;
     }
     return 0;
@@ -104,6 +117,30 @@ void runGradeCalculator() {
     print(students_failed, maxlen);
 }
 
+void runGradeCalculator_v2() {
+    vector<Student_info> did, didnt;
+    Student_info student;
+    // read all the records, separating them based on whether all homework was done
+    while (read(cin, student)) {
+        if (did_all_hw(student))
+            did.push_back(student);
+        else
+            didnt.push_back(student);
+    }
+    // check that both groups contain data
+    if (did.empty()) {
+        cout << "No student did all the homework!" << endl;
+    }
+    if (didnt.empty()) {
+        cout << "Every student did all the homework!" << endl;
+    }
+    // do the analyses
+    write_analysis(cout, "median", median_analysis, did, didnt);
+    write_analysis(cout, "average", average_analysis, did, didnt);
+    write_analysis(cout, "median of homework turned in",
+                   optimistic_median_analysis, did, didnt);
+}
+
 void runStringSplitter() {
     cout << "Please enter a string to be split: ";
     string s;
@@ -138,7 +175,8 @@ void permutatePageIndex() {
     string input;
     vector<string> vet;
     vector<string> original_input;
-    getchar();
+    getchar(); // to consume the dummy char in the buffer
+    
     while (true) {
         cout << "Please enter a string: ";
         getline(cin, input);
@@ -197,3 +235,26 @@ void permutatePageIndex() {
     printVector(outcome); //print the final output string
     cout << endl;
 }
+
+void checkPalindrome() {
+    getchar(); // to consume the dummy char in the buffer
+    cout << "Please enter a string: ";
+    string input;
+    getline(cin, input);
+    if (is_palindrome(input)) {
+        cout << "The given word is a Palinrome!" << endl;
+    } else {
+        cout << "The given word is not a Palinrome!" << endl;
+    }
+}
+
+void findURLs() {
+    getchar(); // to consume the dummy char in the buffer
+    cout << "Please enter a string: ";
+    string input;
+    getline(cin, input);
+
+    vector<string> output = find_urls(input);
+    printVector(output);
+}
+

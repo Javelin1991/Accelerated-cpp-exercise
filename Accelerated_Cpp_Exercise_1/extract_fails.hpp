@@ -15,5 +15,6 @@
 
 bool fgrade(const Student_info&);
 std::list<Student_info> extract_fails(std::list<Student_info>&);
-
+vector<Student_info> extract_fails_v2(vector<Student_info>& students);
+vector<Student_info> extract_fails_v3(vector<Student_info>& students);
 #endif /* extract_fails_hpp */

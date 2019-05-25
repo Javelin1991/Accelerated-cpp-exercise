@@ -33,5 +33,11 @@ void printVector(const vector<string>&);
 string rotateLeft(vector<string>&);
 vector<vector<Item>> rotate(vector<string>&);
 bool compare_result(const Item&, const Item&);
+bool is_palindrome(const string& s);
+vector<string> find_urls(const string& s);
+string::const_iterator url_beg(string::const_iterator b, string::const_iterator e);
+string::const_iterator url_end(string::const_iterator b, string::const_iterator e);
+bool not_url_char(char c);
+vector<string> find_urls(const string& s);
 
 #endif /* print_hpp */

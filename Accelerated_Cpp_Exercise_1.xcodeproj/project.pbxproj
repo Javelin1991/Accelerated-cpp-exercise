@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		4052EB3B22243BF30049EF35 /* grade.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4052EB3422243BF30049EF35 /* grade.cpp */; };
 		4052EB3C22243BF30049EF35 /* Student_Info.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4052EB3522243BF30049EF35 /* Student_Info.cpp */; };
-		4052EB3F22243BF30049EF35 /* median.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4052EB3A22243BF30049EF35 /* median.cpp */; };
 		4052EB44222517ED0049EF35 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4052EB43222517ED0049EF35 /* main.cpp */; };
 		4052EB47222522340049EF35 /* extract_fails.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4052EB45222522340049EF35 /* extract_fails.cpp */; };
 		4052EB4A2225284A0049EF35 /* helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4052EB482225284A0049EF35 /* helper.cpp */; };
@@ -29,13 +28,11 @@
 
 /* Begin PBXFileReference section */
 		4052EB2822243BC40049EF35 /* Accelerated_Cpp_Exercise_1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Accelerated_Cpp_Exercise_1; sourceTree = BUILT_PRODUCTS_DIR; };
-		4052EB3222243BF20049EF35 /* median.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = median.hpp; sourceTree = "<group>"; };
 		4052EB3322243BF20049EF35 /* grade.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = grade.hpp; sourceTree = "<group>"; };
 		4052EB3422243BF30049EF35 /* grade.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = grade.cpp; sourceTree = "<group>"; };
 		4052EB3522243BF30049EF35 /* Student_Info.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Student_Info.cpp; sourceTree = "<group>"; };
 		4052EB3722243BF30049EF35 /* Student_Info.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Student_Info.hpp; sourceTree = "<group>"; };
 		4052EB3822243BF30049EF35 /* main.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = main.hpp; sourceTree = "<group>"; };
-		4052EB3A22243BF30049EF35 /* median.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = median.cpp; sourceTree = "<group>"; };
 		4052EB43222517ED0049EF35 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4052EB45222522340049EF35 /* extract_fails.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = extract_fails.cpp; sourceTree = "<group>"; };
 		4052EB46222522340049EF35 /* extract_fails.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = extract_fails.hpp; sourceTree = "<group>"; };
@@ -77,8 +74,6 @@
 				4052EB3322243BF20049EF35 /* grade.hpp */,
 				4052EB43222517ED0049EF35 /* main.cpp */,
 				4052EB3822243BF30049EF35 /* main.hpp */,
-				4052EB3A22243BF30049EF35 /* median.cpp */,
-				4052EB3222243BF20049EF35 /* median.hpp */,
 				4052EB3522243BF30049EF35 /* Student_Info.cpp */,
 				4052EB3722243BF30049EF35 /* Student_Info.hpp */,
 				4052EB45222522340049EF35 /* extract_fails.cpp */,
@@ -129,6 +124,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 4052EB1F22243BC40049EF35;
 			productRefGroup = 4052EB2922243BC40049EF35 /* Products */;
@@ -146,7 +142,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4052EB3B22243BF30049EF35 /* grade.cpp in Sources */,
-				4052EB3F22243BF30049EF35 /* median.cpp in Sources */,
 				4052EB47222522340049EF35 /* extract_fails.cpp in Sources */,
 				4052EB44222517ED0049EF35 /* main.cpp in Sources */,
 				4052EB3C22243BF30049EF35 /* Student_Info.cpp in Sources */,
