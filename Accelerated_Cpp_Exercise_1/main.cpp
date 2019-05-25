@@ -10,6 +10,7 @@
 #include "Student_Info.hpp"
 #include "extract_fails.hpp"
 #include "helper.hpp"
+#include <map>
 
 using std::cin;
 using std::cout;
@@ -22,6 +23,7 @@ using std::streamsize;
 using std::string;
 using std::vector;
 using std::list;
+using std::map;
 
 void runGradeCalculator();
 void runGradeCalculator_v2();
@@ -30,6 +32,7 @@ void runStringFrameConcatenator();
 void permutatePageIndex();
 void checkPalindrome();
 void findURLs();
+void countWords();
 
 int main()
 {
@@ -42,6 +45,7 @@ int main()
     cout << "(5) Rotate" << endl;
     cout << "(6) Check Palindrome" << endl;
     cout << "(7) URL String Finder" << endl;
+    cout << "(8) Count words occurence" << endl;
 
     cin >> programmeChoice;
     
@@ -63,6 +67,10 @@ int main()
             break;
         case 7: findURLs();
             break;
+        case 8: countWords();
+            break;
+        default:
+            cout << "Invalid Input. Please run the program again." << endl;
     }
     return 0;
 }
@@ -256,5 +264,24 @@ void findURLs() {
 
     vector<string> output = find_urls(input);
     printVector(output);
+}
+
+void countWords() {
+    getchar(); // to consume the dummy char in the buffer
+    cout << "Please provide input strings." << endl;
+    cout << "Enter Ctrl + d to produce answer" << endl;
+
+    string s;
+    map<string, int> counters; // store each word and an associated counter
+    // read the input, keeping track of each word and how often we see it
+    while (cin >> s) {
+        ++counters[s];
+    }
+    cout << endl;
+    // write the words and associated counts
+    for (map<string, int>::const_iterator it = counters.begin();
+         it != counters.end(); ++it) {
+        cout << it->first << "\t" << it->second << endl;
+    }
 }
 
