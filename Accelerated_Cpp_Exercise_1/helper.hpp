@@ -11,10 +11,11 @@
 
 #include <stdio.h>
 #include <list>
+#include <map>
 #include <string>
 #include "Student_Info.hpp"
 
-using std::string; using std::vector; using std::list;
+using std::string; using std::vector; using std::list; using std::map;
 
 struct Item
 {
@@ -39,5 +40,6 @@ string::const_iterator url_beg(string::const_iterator b, string::const_iterator 
 string::const_iterator url_end(string::const_iterator b, string::const_iterator e);
 bool not_url_char(char c);
 vector<string> find_urls(const string& s);
+map<string, vector<int> > xref(istream& in, vector<string> find_words(const string&) = split);
 
 #endif /* print_hpp */

@@ -33,6 +33,7 @@ void permutatePageIndex();
 void checkPalindrome();
 void findURLs();
 void countWords();
+void crossReferenceWords();
 
 int main()
 {
@@ -46,6 +47,7 @@ int main()
     cout << "(6) Check Palindrome" << endl;
     cout << "(7) URL String Finder" << endl;
     cout << "(8) Count words occurence" << endl;
+    cout << "(9) Cross Reference words" << endl;
 
     cin >> programmeChoice;
     
@@ -68,6 +70,8 @@ int main()
         case 7: findURLs();
             break;
         case 8: countWords();
+            break;
+        case 9: crossReferenceWords();
             break;
         default:
             cout << "Invalid Input. Please run the program again." << endl;
@@ -268,8 +272,7 @@ void findURLs() {
 
 void countWords() {
     getchar(); // to consume the dummy char in the buffer
-    cout << "Please provide input strings." << endl;
-    cout << "Enter Ctrl + d to produce answer" << endl;
+    cout << "Please provide input strings. Enter Ctrl + d to produce answer." << endl;
 
     string s;
     map<string, int> counters; // store each word and an associated counter
@@ -285,3 +288,29 @@ void countWords() {
     }
 }
 
+void crossReferenceWords() {
+    getchar(); // to consume the dummy char in the buffer
+    cout << "Please provide input strings. Enter Ctrl + d to produce answer." << endl;
+
+    // call xref using split by default
+    map<string, vector<int> > ret = xref(cin);
+    // write the results
+    cout << endl;
+    for (map<string, vector<int> >::const_iterator it = ret.begin();
+         it != ret.end(); ++it) {
+        // write the word
+        cout << it->first << " occurs on line(s): ";
+        // followed by one or more line numbers
+        vector<int>::const_iterator line_it = it->second.begin();
+        cout << *line_it; // write the first line number
+        ++line_it;
+        // write the rest of the line numbers, if any
+        while (line_it != it->second.end()) {
+            cout << ", " << *line_it;
+            ++line_it;
+        }
+        // write a new line to separate each word from the next
+        cout << endl;
+    }
+    cout << endl;
+}
